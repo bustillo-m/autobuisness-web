@@ -1,625 +1,562 @@
 import { Template, BusinessAnalysis, TemplateRecommendation, ImplementationStep } from '../types';
 
-// Base de datos real de plantillas n8n
+// Base de datos completa de plantillas n8n basada en el README proporcionado
 const TEMPLATES: Template[] = [
-  // Integración y Automatización de CRM y Ventas
+  // === INTEGRACIÓN Y AUTOMATIZACIÓN DE CRM Y VENTAS ===
   {
-    id: 'n8n-001',
+    id: 'wf-001',
     name: 'Integración CRM con HubSpot y Slack',
-    description: 'Sincroniza automáticamente contactos y deals entre HubSpot y Slack, enviando notificaciones en tiempo real sobre oportunidades de venta.',
+    description: 'Automatiza la integración entre CRM HubSpot y Slack para sincronización de contactos y notificaciones.',
     category: 'CRM',
-    industry: ['SaaS', 'B2B', 'Servicios', 'Ventas'],
+    industry: ['SaaS', 'B2B', 'Servicios', 'Tecnología'],
+    businessSize: 'mediana',
+    complexity: 'intermedio',
+    estimatedROI: 250,
+    implementationTime: '2-3 semanas',
+    price: 1200,
+    features: ['Sincronización CRM-Slack', 'Notificaciones automáticas', 'Gestión de contactos', 'Integración bidireccional'],
+    tags: ['crm', 'hubspot', 'slack', 'integración'],
+    codePreview: '// Nodos: 15\n// Workflow de integración CRM-Slack\n{\n  "trigger": "hubspot_webhook",\n  "process": "format_contact_data",\n  "action": "send_slack_notification"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['HubSpot API', 'Slack Workspace', 'n8n Cloud/Self-hosted'],
+    isPremium: true
+  },
+  {
+    id: 'wf-002',
+    name: 'Automatización de Leads en Pipedrive',
+    description: 'Sistema automatizado para gestión y calificación de leads en Pipedrive con scoring inteligente.',
+    category: 'CRM',
+    industry: ['Ventas', 'B2B', 'Inmobiliaria', 'Servicios'],
     businessSize: 'pequeña',
     complexity: 'básico',
     estimatedROI: 180,
-    implementationTime: '2-3 semanas',
+    implementationTime: '1-2 semanas',
     price: 899,
-    features: [
-      'Sincronización automática de contactos',
-      'Notificaciones en Slack',
-      'Actualización de deals en tiempo real',
-      'Integración bidireccional'
-    ],
-    tags: ['crm', 'hubspot', 'slack', 'ventas'],
-    codePreview: `// Nodos: 15
-// Automatización de sincronización CRM
-{
-  "webhook": "trigger_new_contact",
-  "hubspot": "get_contact_data",
-  "slack": "send_notification",
-  "conditions": "validate_deal_stage"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Cuenta HubSpot', 'Workspace Slack', 'n8n instalado', 'API keys'],
+    features: ['Lead scoring automático', 'Asignación inteligente', 'Seguimiento automatizado', 'Reportes de conversión'],
+    tags: ['pipedrive', 'leads', 'scoring', 'ventas'],
+    codePreview: '// Nodos: 12\n// Sistema de scoring de leads\n{\n  "lead_capture": "webhook_form",\n  "scoring": "calculate_lead_score",\n  "assignment": "assign_to_sales_rep"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Pipedrive CRM', 'Formularios web', 'APIs de terceros'],
     isPremium: true
   },
   {
-    id: 'n8n-002',
-    name: 'Automatización de Leads en Pipedrive',
-    description: 'Automatiza la gestión de leads en Pipedrive con scoring automático, asignación inteligente y seguimiento de actividades.',
-    category: 'CRM',
-    industry: ['B2B', 'Inmobiliaria', 'Servicios', 'Ventas'],
+    id: 'wf-003',
+    name: 'Sistema de Ventas con Stripe y Email Marketing',
+    description: 'Automatización completa del proceso de ventas integrando Stripe para pagos y email marketing.',
+    category: 'Ventas',
+    industry: ['E-commerce', 'SaaS', 'Servicios Digitales'],
     businessSize: 'mediana',
-    complexity: 'intermedio',
-    estimatedROI: 250,
-    implementationTime: '3-4 semanas',
-    price: 1299,
-    features: [
-      'Scoring automático de leads',
-      'Asignación inteligente de vendedores',
-      'Seguimiento automatizado',
-      'Reportes de actividad'
-    ],
-    tags: ['pipedrive', 'leads', 'scoring', 'automation'],
-    codePreview: `// Nodos: 22
-// Sistema de scoring de leads
-{
-  "trigger": "new_lead_webhook",
-  "scoring_logic": "calculate_lead_score",
-  "assignment": "assign_to_salesperson",
-  "followup": "schedule_activities"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Cuenta Pipedrive', 'n8n instalado', 'Base de datos', 'API access'],
-    isPremium: true
-  },
-  {
-    id: 'n8n-003',
-    name: 'Integración Salesforce Multi-canal',
-    description: 'Conecta Salesforce con múltiples canales (email, SMS, WhatsApp) para campañas automatizadas y seguimiento unificado.',
-    category: 'CRM',
-    industry: ['Enterprise', 'B2B', 'SaaS', 'Servicios'],
-    businessSize: 'enterprise',
     complexity: 'avanzado',
-    estimatedROI: 320,
-    implementationTime: '6-8 semanas',
-    price: 2499,
-    features: [
-      'Integración multi-canal',
-      'Campañas automatizadas',
-      'Seguimiento unificado',
-      'Analytics avanzados'
-    ],
-    tags: ['salesforce', 'multicanal', 'email', 'sms', 'whatsapp'],
-    codePreview: `// Nodos: 35
-// Orquestador de campañas multi-canal
-{
-  "salesforce_trigger": "opportunity_update",
-  "channel_router": "determine_best_channel",
-  "email_service": "send_personalized_email",
-  "sms_service": "send_sms_followup",
-  "whatsapp": "send_whatsapp_message"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Salesforce Enterprise', 'SendGrid/Mailgun', 'Twilio', 'WhatsApp Business API'],
+    estimatedROI: 350,
+    implementationTime: '4-6 semanas',
+    price: 2100,
+    features: ['Procesamiento de pagos', 'Email sequences', 'Gestión de suscripciones', 'Analytics de ventas'],
+    tags: ['stripe', 'email-marketing', 'pagos', 'suscripciones'],
+    codePreview: '// Nodos: 25\n// Sistema completo de ventas\n{\n  "payment": "stripe_webhook",\n  "email": "trigger_email_sequence",\n  "analytics": "track_conversion_metrics"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Stripe Account', 'Email Service Provider', 'Database'],
     isPremium: true
   },
-
-  // Notificaciones y Alertas
   {
-    id: 'n8n-004',
-    name: 'Sistema de Alertas Multi-canal',
-    description: 'Sistema robusto de notificaciones que envía alertas críticas a través de email, Slack, Teams y SMS basado en prioridades.',
-    category: 'Operaciones',
-    industry: ['Tecnología', 'DevOps', 'SaaS', 'Servicios'],
-    businessSize: 'mediana',
+    id: 'wf-004',
+    name: 'Automatización de Facturas con QuickBooks',
+    description: 'Automatiza la creación y envío de facturas usando QuickBooks con seguimiento de pagos.',
+    category: 'Finanzas',
+    industry: ['Servicios', 'Consultoría', 'Freelance', 'Pequeños Negocios'],
+    businessSize: 'pequeña',
     complexity: 'intermedio',
     estimatedROI: 200,
     implementationTime: '2-3 semanas',
-    price: 1099,
-    features: [
-      'Alertas multi-canal',
-      'Priorización automática',
-      'Escalado inteligente',
-      'Dashboard de monitoreo'
-    ],
-    tags: ['alertas', 'notificaciones', 'slack', 'teams', 'sms'],
-    codePreview: `// Nodos: 18
-// Sistema de alertas escalonadas
-{
-  "monitoring_webhook": "receive_alert",
-  "priority_logic": "determine_severity",
-  "channel_selector": "choose_notification_method",
-  "escalation": "escalate_if_no_response"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Slack/Teams', 'Email service', 'SMS provider', 'Monitoring tools'],
+    price: 1050,
+    features: ['Facturación automática', 'Seguimiento de pagos', 'Recordatorios', 'Reportes financieros'],
+    tags: ['quickbooks', 'facturas', 'contabilidad', 'pagos'],
+    codePreview: '// Nodos: 18\n// Automatización de facturas\n{\n  "trigger": "invoice_due",\n  "create": "generate_invoice_qb",\n  "send": "email_invoice_client"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['QuickBooks Online', 'Email Service', 'Cliente database'],
     isPremium: true
   },
+
+  // === NOTIFICACIONES Y ALERTAS ===
   {
-    id: 'n8n-005',
-    name: 'Monitor de Redes Sociales con IA',
-    description: 'Monitorea menciones de marca en redes sociales, analiza sentiment con IA y envía alertas automatizadas al equipo de marketing.',
+    id: 'wf-005',
+    name: 'Monitor de Sitio Web con Alertas Múltiples',
+    description: 'Sistema de monitoreo de sitio web con alertas por email, Slack y SMS cuando detecta problemas.',
+    category: 'Operaciones',
+    industry: ['Tecnología', 'E-commerce', 'SaaS', 'Servicios Digitales'],
+    businessSize: 'mediana',
+    complexity: 'intermedio',
+    estimatedROI: 300,
+    implementationTime: '1-2 semanas',
+    price: 750,
+    features: ['Monitoreo 24/7', 'Alertas multi-canal', 'Tiempo de respuesta', 'Reportes de uptime'],
+    tags: ['monitoring', 'alertas', 'uptime', 'notificaciones'],
+    codePreview: '// Nodos: 10\n// Monitor de sitio web\n{\n  "check": "http_request_ping",\n  "alert": "send_multi_channel_alert",\n  "log": "store_uptime_data"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['URLs a monitorear', 'Slack/Email/SMS APIs', 'Base de datos'],
+    isPremium: false
+  },
+  {
+    id: 'wf-006',
+    name: 'Alertas de Redes Sociales y Menciones',
+    description: 'Monitorea menciones de marca en redes sociales y envía alertas inmediatas al equipo.',
     category: 'Marketing',
-    industry: ['Marketing', 'E-commerce', 'Retail', 'SaaS'],
+    industry: ['Retail', 'B2C', 'Agencias', 'Marcas'],
+    businessSize: 'pequeña',
+    complexity: 'básico',
+    estimatedROI: 150,
+    implementationTime: '1 semana',
+    price: 650,
+    features: ['Monitoreo de menciones', 'Análisis de sentimiento', 'Alertas en tiempo real', 'Dashboard'],
+    tags: ['social-media', 'menciones', 'brand-monitoring', 'alertas'],
+    codePreview: '// Nodos: 8\n// Monitor de menciones\n{\n  "search": "social_media_api_search",\n  "analyze": "sentiment_analysis",\n  "notify": "send_team_alert"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Social Media APIs', 'Sentiment Analysis API', 'Notification channels'],
+    isPremium: false
+  },
+  {
+    id: 'wf-007',
+    name: 'Sistema de Alertas Financieras',
+    description: 'Monitorea métricas financieras clave y envía alertas cuando se superan umbrales establecidos.',
+    category: 'Finanzas',
+    industry: ['Fintech', 'SaaS', 'E-commerce', 'Servicios'],
+    businessSize: 'mediana',
+    complexity: 'avanzado',
+    estimatedROI: 280,
+    implementationTime: '3-4 semanas',
+    price: 1680,
+    features: ['Monitoreo de KPIs', 'Umbrales personalizados', 'Predicciones', 'Reportes automáticos'],
+    tags: ['finanzas', 'kpis', 'alertas', 'analytics'],
+    codePreview: '// Nodos: 22\n// Alertas financieras\n{\n  "data": "fetch_financial_metrics",\n  "analyze": "compare_thresholds",\n  "alert": "send_executive_report"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Financial APIs', 'Database', 'Analytics tools', 'Reporting platform'],
+    isPremium: true
+  },
+
+  // === SINCRONIZACIÓN DE DATOS Y ARCHIVOS ===
+  {
+    id: 'wf-008',
+    name: 'Sincronización Google Drive con Base de Datos',
+    description: 'Sincroniza automáticamente archivos de Google Drive con base de datos para backup y organización.',
+    category: 'Operaciones',
+    industry: ['Servicios', 'Consultoría', 'Educación', 'Tecnología'],
     businessSize: 'pequeña',
     complexity: 'intermedio',
     estimatedROI: 180,
-    implementationTime: '3-4 semanas',
-    price: 1399,
-    features: [
-      'Monitoreo de menciones',
-      'Análisis de sentiment con IA',
-      'Alertas automatizadas',
-      'Reportes de reputación'
-    ],
-    tags: ['social-media', 'ia', 'sentiment', 'monitoreo', 'brand'],
-    codePreview: `// Nodos: 25
-// Monitor inteligente de marca
-{
-  "social_scraper": "monitor_mentions",
-  "ai_sentiment": "analyze_sentiment",
-  "alert_logic": "determine_response_urgency",
-  "team_notification": "notify_marketing_team"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['API de redes sociales', 'OpenAI/Claude API', 'Base de datos', 'Herramientas de comunicación'],
+    implementationTime: '2-3 semanas',
+    price: 950,
+    features: ['Sync bidireccional', 'Backup automático', 'Organización inteligente', 'Control de versiones'],
+    tags: ['google-drive', 'sync', 'backup', 'archivos'],
+    codePreview: '// Nodos: 14\n// Sincronización Drive-DB\n{\n  "monitor": "drive_file_changes",\n  "process": "extract_metadata",\n  "store": "update_database_record"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Google Drive API', 'Database', 'Storage solution'],
     isPremium: true
   },
-
-  // Sincronización de Datos y Archivos
   {
-    id: 'n8n-006',
-    name: 'Sincronización Google Drive - Dropbox Enterprise',
-    description: 'Sincronización bidireccional automática entre Google Drive y Dropbox con versionado, backup y gestión de conflictos.',
-    category: 'Operaciones',
-    industry: ['Servicios', 'Consultora', 'Tecnología', 'Educación'],
+    id: 'wf-009',
+    name: 'Migración Automática de Datos Excel a CRM',
+    description: 'Automatiza la migración de datos desde archivos Excel hacia sistemas CRM con validación.',
+    category: 'CRM',
+    industry: ['Ventas', 'B2B', 'Servicios', 'Consultoría'],
     businessSize: 'mediana',
     complexity: 'avanzado',
-    estimatedROI: 150,
-    implementationTime: '4-5 semanas',
-    price: 1699,
-    features: [
-      'Sincronización bidireccional',
-      'Control de versiones',
-      'Backup automático',
-      'Resolución de conflictos'
-    ],
-    tags: ['google-drive', 'dropbox', 'sync', 'backup', 'files'],
-    codePreview: `// Nodos: 28
-// Sincronizador inteligente de archivos
-{
-  "drive_monitor": "watch_file_changes",
-  "conflict_resolver": "handle_version_conflicts",
-  "dropbox_sync": "sync_to_dropbox",
-  "backup_manager": "create_versioned_backup"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Google Drive API', 'Dropbox Business API', 'Base de datos', 'Almacenamiento adicional'],
+    estimatedROI: 320,
+    implementationTime: '3-5 semanas',
+    price: 1850,
+    features: ['Parseo automático', 'Validación de datos', 'Mapeo inteligente', 'Reportes de migración'],
+    tags: ['excel', 'crm', 'migración', 'datos'],
+    codePreview: '// Nodos: 28\n// Migración Excel-CRM\n{\n  "read": "parse_excel_file",\n  "validate": "data_quality_check",\n  "import": "bulk_crm_import"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Excel files', 'CRM API', 'Data validation rules'],
     isPremium: true
   },
   {
-    id: 'n8n-007',
-    name: 'ETL para Data Warehouse',
-    description: 'Pipeline ETL automatizado que extrae datos de múltiples fuentes, los transforma y carga en data warehouse con validación y logging.',
-    category: 'Finanzas',
-    industry: ['Fintech', 'E-commerce', 'SaaS', 'Analytics'],
-    businessSize: 'enterprise',
+    id: 'wf-010',
+    name: 'Backup Automático Multi-Plataforma',
+    description: 'Sistema de backup que sincroniza datos entre múltiples plataformas cloud automáticamente.',
+    category: 'Operaciones',
+    industry: ['Tecnología', 'SaaS', 'Agencias', 'Servicios'],
+    businessSize: 'mediana',
     complexity: 'avanzado',
-    estimatedROI: 280,
-    implementationTime: '8-10 semanas',
-    price: 3499,
-    features: [
-      'Extracción multi-fuente',
-      'Transformación de datos',
-      'Validación automática',
-      'Logging y monitoreo'
-    ],
-    tags: ['etl', 'data-warehouse', 'analytics', 'big-data'],
-    codePreview: `// Nodos: 42
-// Pipeline ETL empresarial
-{
-  "data_extractors": "multiple_source_extraction",
-  "transformation_engine": "clean_and_transform",
-  "validation_layer": "data_quality_checks",
-  "warehouse_loader": "load_to_warehouse"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Data Warehouse', 'APIs de fuentes de datos', 'Base de datos', 'Herramientas de BI'],
+    estimatedROI: 250,
+    implementationTime: '4-6 semanas',
+    price: 2200,
+    features: ['Multi-cloud backup', 'Encriptación', 'Programación flexible', 'Monitoreo de integridad'],
+    tags: ['backup', 'cloud', 'seguridad', 'sincronización'],
+    codePreview: '// Nodos: 35\n// Backup multi-plataforma\n{\n  "source": "collect_from_platforms",\n  "encrypt": "secure_data_encryption",\n  "distribute": "store_multiple_locations"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Multiple cloud APIs', 'Encryption tools', 'Monitoring system'],
     isPremium: true
   },
 
-  // Herramientas de Productividad y Colaboración
+  // === HERRAMIENTAS DE PRODUCTIVIDAD Y COLABORACIÓN ===
   {
-    id: 'n8n-008',
-    name: 'Automatización de Reuniones con IA',
-    description: 'Gestiona automáticamente calendarios, envía invitaciones, graba reuniones, genera resúmenes con IA y distribuye actas.',
-    category: 'RRHH',
-    industry: ['Servicios', 'Consultora', 'SaaS', 'Tecnología'],
+    id: 'wf-011',
+    name: 'Automatización de Reuniones con Zoom y Calendar',
+    description: 'Automatiza la programación de reuniones integrando Zoom con Google Calendar y envío de recordatorios.',
+    category: 'Operaciones',
+    industry: ['Servicios', 'Consultoría', 'SaaS', 'Educación'],
+    businessSize: 'pequeña',
+    complexity: 'básico',
+    estimatedROI: 160,
+    implementationTime: '1-2 semanas',
+    price: 720,
+    features: ['Programación automática', 'Links de Zoom', 'Recordatorios', 'Seguimiento de asistencia'],
+    tags: ['zoom', 'calendar', 'reuniones', 'automatización'],
+    codePreview: '// Nodos: 12\n// Automatización reuniones\n{\n  "schedule": "create_calendar_event",\n  "zoom": "generate_meeting_link",\n  "notify": "send_reminders"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Zoom API', 'Google Calendar API', 'Email service'],
+    isPremium: false
+  },
+  {
+    id: 'wf-012',
+    name: 'Sistema de Gestión de Tareas con Slack',
+    description: 'Integra gestión de tareas con Slack para crear, asignar y hacer seguimiento de tareas del equipo.',
+    category: 'Operaciones',
+    industry: ['Tecnología', 'Agencias', 'Startups', 'Servicios'],
     businessSize: 'pequeña',
     complexity: 'intermedio',
-    estimatedROI: 220,
-    implementationTime: '3-4 semanas',
-    price: 1599,
-    features: [
-      'Gestión automática de calendarios',
-      'Grabación de reuniones',
-      'Resúmenes con IA',
-      'Distribución de actas'
-    ],
-    tags: ['meetings', 'calendar', 'ia', 'productivity', 'automation'],
-    codePreview: `// Nodos: 30
-// Asistente inteligente de reuniones
-{
-  "calendar_manager": "schedule_meetings",
-  "recording_service": "auto_record_meeting",
-  "ai_summarizer": "generate_meeting_summary",
-  "distribution": "send_meeting_notes"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Google Calendar/Outlook', 'Zoom/Teams', 'OpenAI API', 'Email service'],
+    estimatedROI: 200,
+    implementationTime: '2-3 semanas',
+    price: 1100,
+    features: ['Creación de tareas', 'Asignación automática', 'Recordatorios', 'Reportes de productividad'],
+    tags: ['slack', 'tareas', 'productividad', 'equipo'],
+    codePreview: '// Nodos: 16\n// Gestión de tareas\n{\n  "create": "slack_command_task",\n  "assign": "auto_assign_team_member",\n  "track": "monitor_task_progress"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Slack Workspace', 'Task management system', 'Team database'],
     isPremium: true
   },
   {
-    id: 'n8n-009',
-    name: 'Sistema de Tickets Inteligente',
-    description: 'Sistema avanzado de gestión de tickets con clasificación automática por IA, asignación inteligente y escalado predictivo.',
-    category: 'Soporte',
-    industry: ['SaaS', 'Tecnología', 'Servicios', 'E-commerce'],
+    id: 'wf-013',
+    name: 'Automatización de Informes y Documentación',
+    description: 'Genera automáticamente informes y documentación desde múltiples fuentes de datos.',
+    category: 'Operaciones',
+    industry: ['Consultoría', 'Agencias', 'Servicios', 'Finanzas'],
     businessSize: 'mediana',
     complexity: 'avanzado',
     estimatedROI: 300,
-    implementationTime: '5-6 semanas',
-    price: 2199,
-    features: [
-      'Clasificación automática con IA',
-      'Asignación inteligente',
-      'Escalado predictivo',
-      'Analytics de soporte'
-    ],
-    tags: ['tickets', 'support', 'ia', 'classification', 'automation'],
-    codePreview: `// Nodos: 35
-// Sistema inteligente de soporte
-{
-  "ticket_classifier": "ai_categorize_ticket",
-  "smart_assignment": "assign_to_best_agent",
-  "escalation_predictor": "predict_escalation_need",
-  "analytics_engine": "generate_support_metrics"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Sistema de tickets', 'IA/ML APIs', 'Base de datos', 'Analytics tools'],
-    isPremium: true
-  },
-
-  // Gestión de Contenido y Redes Sociales
-  {
-    id: 'n8n-010',
-    name: 'Publicación Multi-red Social con IA',
-    description: 'Automatiza la creación y publicación de contenido en múltiples redes sociales con optimización por IA y análisis de engagement.',
-    category: 'Marketing',
-    industry: ['Marketing', 'E-commerce', 'Influencers', 'Agencias'],
-    businessSize: 'pequeña',
-    complexity: 'intermedio',
-    estimatedROI: 250,
     implementationTime: '4-5 semanas',
-    price: 1799,
-    features: [
-      'Creación de contenido con IA',
-      'Publicación multi-red',
-      'Optimización automática',
-      'Analytics de engagement'
-    ],
-    tags: ['social-media', 'ia', 'content', 'automation', 'analytics'],
-    codePreview: `// Nodos: 26
-// Gestor inteligente de redes sociales
-{
-  "content_generator": "ai_create_content",
-  "platform_optimizer": "optimize_for_platform",
-  "scheduler": "schedule_posts",
-  "analytics": "track_engagement"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['APIs de redes sociales', 'OpenAI/Claude', 'Base de datos', 'Herramientas de analytics'],
-    isPremium: true
-  },
-  {
-    id: 'n8n-011',
-    name: 'Curación de Contenido Automatizada',
-    description: 'Sistema que busca, filtra y curea contenido relevante automáticamente, generando newsletters y posts con IA.',
-    category: 'Marketing',
-    industry: ['Marketing', 'Media', 'Consultora', 'Educación'],
-    businessSize: 'pequeña',
-    complexity: 'intermedio',
-    estimatedROI: 180,
-    implementationTime: '3-4 semanas',
-    price: 1299,
-    features: [
-      'Búsqueda automática de contenido',
-      'Filtrado inteligente',
-      'Generación de newsletters',
-      'Curación con IA'
-    ],
-    tags: ['content', 'curation', 'newsletter', 'ia', 'automation'],
-    codePreview: `// Nodos: 22
-// Curador inteligente de contenido
-{
-  "content_scraper": "find_relevant_content",
-  "ai_filter": "filter_quality_content",
-  "newsletter_generator": "create_newsletter",
-  "distribution": "send_to_subscribers"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Web scraping tools', 'IA APIs', 'Email service', 'Base de datos'],
+    price: 1950,
+    features: ['Generación automática', 'Múltiples formatos', 'Plantillas dinámicas', 'Distribución automática'],
+    tags: ['informes', 'documentación', 'automatización', 'reportes'],
+    codePreview: '// Nodos: 24\n// Generación de informes\n{\n  "collect": "gather_data_sources",\n  "generate": "create_dynamic_report",\n  "distribute": "send_to_stakeholders"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Data sources', 'Template engine', 'Document generation tools'],
     isPremium: true
   },
 
-  // Inteligencia Artificial y NLP
+  // === GESTIÓN DE CONTENIDO Y REDES SOCIALES ===
   {
-    id: 'n8n-012',
-    name: 'Análisis de Sentiment Empresarial',
-    description: 'Analiza automáticamente el sentiment de reviews, comentarios y feedback usando múltiples modelos de IA con reportes ejecutivos.',
+    id: 'wf-014',
+    name: 'Publicación Automática Multi-Redes Sociales',
+    description: 'Automatiza la publicación de contenido en múltiples redes sociales con programación inteligente.',
     category: 'Marketing',
-    industry: ['E-commerce', 'SaaS', 'Servicios', 'Retail'],
+    industry: ['Marketing', 'Agencias', 'E-commerce', 'Marcas'],
+    businessSize: 'pequeña',
+    complexity: 'intermedio',
+    estimatedROI: 220,
+    implementationTime: '2-3 semanas',
+    price: 1250,
+    features: ['Multi-plataforma', 'Programación inteligente', 'Optimización de horarios', 'Analytics integrado'],
+    tags: ['social-media', 'publicación', 'marketing', 'automatización'],
+    codePreview: '// Nodos: 18\n// Publicación multi-redes\n{\n  "content": "prepare_content_format",\n  "schedule": "optimal_posting_time",\n  "publish": "post_all_platforms"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Social Media APIs', 'Content management', 'Analytics tools'],
+    isPremium: true
+  },
+  {
+    id: 'wf-015',
+    name: 'Curación de Contenido con IA',
+    description: 'Sistema de IA que curea automáticamente contenido relevante para tu audiencia desde múltiples fuentes.',
+    category: 'Marketing',
+    industry: ['Marketing', 'Medios', 'Educación', 'B2B'],
     businessSize: 'mediana',
     complexity: 'avanzado',
-    estimatedROI: 200,
-    implementationTime: '4-6 semanas',
-    price: 2099,
-    features: [
-      'Análisis multi-modelo de IA',
-      'Procesamiento de múltiples fuentes',
-      'Reportes ejecutivos automáticos',
-      'Alertas de sentiment negativo'
-    ],
-    tags: ['sentiment', 'ia', 'nlp', 'analytics', 'reviews'],
-    codePreview: `// Nodos: 31
-// Analizador empresarial de sentiment
-{
-  "data_collector": "gather_feedback_sources",
-  "ai_analyzer": "multi_model_sentiment",
-  "report_generator": "create_executive_reports",
-  "alert_system": "negative_sentiment_alerts"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['APIs de IA/NLP', 'Fuentes de datos', 'Base de datos', 'Herramientas de reporting'],
+    estimatedROI: 280,
+    implementationTime: '3-4 semanas',
+    price: 1750,
+    features: ['IA para curación', 'Filtros inteligentes', 'Categorización automática', 'Sugerencias de contenido'],
+    tags: ['ia', 'curación', 'contenido', 'automatización'],
+    codePreview: '// Nodos: 26\n// Curación con IA\n{\n  "sources": "monitor_content_sources",\n  "ai": "analyze_content_relevance",\n  "curate": "select_best_content"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['AI/ML APIs', 'Content sources', 'Classification system'],
     isPremium: true
   },
   {
-    id: 'n8n-013',
-    name: 'Chatbot Multiidioma Avanzado',
-    description: 'Chatbot empresarial con IA que maneja múltiples idiomas, integra con CRM y bases de conocimiento para soporte 24/7.',
+    id: 'wf-016',
+    name: 'Gestión de Comentarios y Engagement',
+    description: 'Automatiza la gestión de comentarios y engagement en redes sociales con respuestas inteligentes.',
+    category: 'Marketing',
+    industry: ['E-commerce', 'Marcas', 'Servicios', 'B2C'],
+    businessSize: 'pequeña',
+    complexity: 'intermedio',
+    estimatedROI: 190,
+    implementationTime: '2-3 semanas',
+    price: 980,
+    features: ['Monitoreo de comentarios', 'Respuestas automáticas', 'Escalación inteligente', 'Métricas de engagement'],
+    tags: ['engagement', 'comentarios', 'social-media', 'atención'],
+    codePreview: '// Nodos: 15\n// Gestión de engagement\n{\n  "monitor": "track_comments_mentions",\n  "analyze": "sentiment_priority_analysis",\n  "respond": "auto_reply_or_escalate"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Social Media APIs', 'NLP tools', 'Customer service system'],
+    isPremium: true
+  },
+
+  // === INTELIGENCIA ARTIFICIAL Y NLP ===
+  {
+    id: 'wf-017',
+    name: 'Chatbot Inteligente con OpenAI',
+    description: 'Chatbot avanzado integrado con OpenAI para atención al cliente 24/7 con escalación humana.',
     category: 'Soporte',
+    industry: ['E-commerce', 'SaaS', 'Servicios', 'Tecnología'],
+    businessSize: 'mediana',
+    complexity: 'avanzado',
+    estimatedROI: 400,
+    implementationTime: '4-6 semanas',
+    price: 2500,
+    features: ['IA conversacional', 'Escalación inteligente', 'Aprendizaje continuo', 'Multi-idioma'],
+    tags: ['chatbot', 'openai', 'ai', 'atención-cliente'],
+    codePreview: '// Nodos: 32\n// Chatbot inteligente\n{\n  "input": "receive_user_message",\n  "ai": "openai_response_generation",\n  "decision": "escalate_or_respond"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['OpenAI API', 'Chat platform', 'Knowledge base', 'CRM integration'],
+    isPremium: true
+  },
+  {
+    id: 'wf-018',
+    name: 'Análisis de Sentimientos en Tiempo Real',
+    description: 'Analiza automáticamente el sentimiento de comentarios, reviews y menciones usando IA.',
+    category: 'Marketing',
+    industry: ['E-commerce', 'Servicios', 'Marcas', 'Hospitality'],
+    businessSize: 'mediana',
+    complexity: 'intermedio',
+    estimatedROI: 240,
+    implementationTime: '2-4 semanas',
+    price: 1400,
+    features: ['Análisis en tiempo real', 'Dashboard de sentimientos', 'Alertas automáticas', 'Reportes detallados'],
+    tags: ['sentiment', 'ai', 'analytics', 'monitoring'],
+    codePreview: '// Nodos: 20\n// Análisis de sentimientos\n{\n  "collect": "gather_mentions_reviews",\n  "analyze": "ai_sentiment_analysis",\n  "alert": "notify_negative_sentiment"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['NLP APIs', 'Data sources', 'Dashboard platform'],
+    isPremium: true
+  },
+  {
+    id: 'wf-019',
+    name: 'Generación Automática de Contenido SEO',
+    description: 'Genera automáticamente contenido optimizado para SEO usando IA basado en keywords y competencia.',
+    category: 'Marketing',
+    industry: ['Marketing', 'E-commerce', 'Blogs', 'Agencias'],
+    businessSize: 'pequeña',
+    complexity: 'avanzado',
+    estimatedROI: 350,
+    implementationTime: '3-5 semanas',
+    price: 1950,
+    features: ['Generación con IA', 'Optimización SEO', 'Análisis de competencia', 'Publicación automática'],
+    tags: ['seo', 'contenido', 'ai', 'marketing'],
+    codePreview: '// Nodos: 28\n// Generación SEO\n{\n  "research": "keyword_competitor_analysis",\n  "generate": "ai_content_creation",\n  "optimize": "seo_enhancement"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['AI/GPT APIs', 'SEO tools', 'CMS integration'],
+    isPremium: true
+  },
+
+  // === WEB SCRAPING Y EXTRACCIÓN DE DATOS ===
+  {
+    id: 'wf-020',
+    name: 'Monitor de Precios de Competencia',
+    description: 'Monitorea automáticamente los precios de la competencia y ajusta estrategias de pricing.',
+    category: 'E-commerce',
+    industry: ['E-commerce', 'Retail', 'Marketplace'],
+    businessSize: 'mediana',
+    complexity: 'intermedio',
+    estimatedROI: 280,
+    implementationTime: '3-4 semanas',
+    price: 1600,
+    features: ['Scraping automático', 'Alertas de precio', 'Análisis competitivo', 'Recomendaciones de pricing'],
+    tags: ['scraping', 'precios', 'competencia', 'e-commerce'],
+    codePreview: '// Nodos: 22\n// Monitor de precios\n{\n  "scrape": "extract_competitor_prices",\n  "analyze": "price_trend_analysis",\n  "alert": "pricing_recommendation"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Web scraping tools', 'Proxy services', 'Database', 'Analytics platform'],
+    isPremium: true
+  },
+  {
+    id: 'wf-021',
+    name: 'Extracción de Leads desde LinkedIn',
+    description: 'Extrae automáticamente información de leads potenciales desde LinkedIn con filtros avanzados.',
+    category: 'Ventas',
+    industry: ['B2B', 'Servicios', 'Consultoría', 'Ventas'],
+    businessSize: 'pequeña',
+    complexity: 'avanzado',
+    estimatedROI: 320,
+    implementationTime: '4-5 semanas',
+    price: 2100,
+    features: ['Scraping inteligente', 'Filtros avanzados', 'Validación de datos', 'CRM integration'],
+    tags: ['linkedin', 'leads', 'scraping', 'ventas'],
+    codePreview: '// Nodos: 30\n// Extracción LinkedIn\n{\n  "search": "linkedin_advanced_search",\n  "extract": "profile_data_extraction",\n  "validate": "contact_verification"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['LinkedIn access', 'Scraping infrastructure', 'Data validation', 'CRM system'],
+    isPremium: true
+  },
+  {
+    id: 'wf-022',
+    name: 'Agregador de Noticias de Industria',
+    description: 'Agrega automáticamente noticias relevantes de tu industria desde múltiples fuentes.',
+    category: 'Marketing',
+    industry: ['Medios', 'Consultoría', 'Finanzas', 'Tecnología'],
+    businessSize: 'pequeña',
+    complexity: 'básico',
+    estimatedROI: 150,
+    implementationTime: '1-2 semanas',
+    price: 650,
+    features: ['Múltiples fuentes', 'Filtros por relevancia', 'Categorización automática', 'Newsletter automático'],
+    tags: ['noticias', 'scraping', 'industria', 'contenido'],
+    codePreview: '// Nodos: 14\n// Agregador de noticias\n{\n  "sources": "scrape_news_sources",\n  "filter": "relevance_filtering",\n  "distribute": "create_newsletter"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['News APIs', 'Content filtering', 'Email service'],
+    isPremium: false
+  },
+
+  // === AGENTES AUTÓNOMOS Y LÓGICA DINÁMICA ===
+  {
+    id: 'wf-023',
+    name: 'Agente Autónomo de Trading',
+    description: 'Agente de IA que ejecuta operaciones de trading automáticamente basado en análisis técnico y fundamental.',
+    category: 'Finanzas',
+    industry: ['Fintech', 'Trading', 'Inversiones'],
+    businessSize: 'mediana',
+    complexity: 'avanzado',
+    estimatedROI: 400,
+    implementationTime: '6-8 semanas',
+    price: 3500,
+    features: ['Trading automático', 'Análisis técnico', 'Gestión de riesgo', 'Reportes de performance'],
+    tags: ['trading', 'ai', 'finanzas', 'autonomo'],
+    codePreview: '// Nodos: 45\n// Agente de trading\n{\n  "analysis": "technical_fundamental_analysis",\n  "decision": "ai_trading_decision",\n  "execute": "automated_trade_execution"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Trading APIs', 'Market data', 'Risk management', 'Compliance tools'],
+    isPremium: true
+  },
+  {
+    id: 'wf-024',
+    name: 'Sistema de Decisiones Inteligentes',
+    description: 'Agente que toma decisiones comerciales automáticamente basado en datos y reglas de negocio.',
+    category: 'Operaciones',
     industry: ['SaaS', 'E-commerce', 'Servicios', 'Tecnología'],
     businessSize: 'mediana',
     complexity: 'avanzado',
     estimatedROI: 350,
-    implementationTime: '6-8 semanas',
-    price: 2899,
-    features: [
-      'Soporte multiidioma',
-      'Integración con CRM',
-      'Base de conocimiento',
-      'Escalado inteligente'
-    ],
-    tags: ['chatbot', 'ia', 'multiidioma', 'crm', '24/7'],
-    codePreview: `// Nodos: 38
-// Chatbot empresarial inteligente
-{
-  "language_detector": "detect_user_language",
-  "ai_processor": "process_multilingual_query",
-  "crm_integration": "check_customer_context",
-  "knowledge_base": "search_relevant_info"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['IA/NLP APIs', 'CRM system', 'Base de conocimiento', 'Chat platform'],
-    isPremium: true
-  },
-
-  // Web Scraping y Extracción de Datos
-  {
-    id: 'n8n-014',
-    name: 'Monitor de Competencia Automatizado',
-    description: 'Sistema que monitorea automáticamente precios, productos y estrategias de competidores con alertas y reportes de inteligencia competitiva.',
-    category: 'Marketing',
-    industry: ['E-commerce', 'Retail', 'SaaS', 'Servicios'],
-    businessSize: 'mediana',
-    complexity: 'avanzado',
-    estimatedROI: 280,
     implementationTime: '5-7 semanas',
-    price: 2399,
-    features: [
-      'Monitoreo de precios automático',
-      'Análisis de productos competidores',
-      'Inteligencia competitiva',
-      'Alertas de cambios importantes'
-    ],
-    tags: ['competitive-intelligence', 'scraping', 'monitoring', 'analytics'],
-    codePreview: `// Nodos: 33
-// Monitor inteligente de competencia
-{
-  "web_scraper": "scrape_competitor_data",
-  "price_analyzer": "analyze_pricing_changes",
-  "product_tracker": "track_new_products",
-  "intelligence_reporter": "generate_competitive_reports"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Web scraping tools', 'Proxy services', 'Base de datos', 'Analytics platform'],
+    price: 2800,
+    features: ['Decisiones automáticas', 'Reglas de negocio', 'Machine learning', 'Audit trail'],
+    tags: ['decisiones', 'ai', 'automatización', 'business-logic'],
+    codePreview: '// Nodos: 38\n// Sistema de decisiones\n{\n  "data": "collect_business_metrics",\n  "analyze": "ml_decision_engine",\n  "execute": "automated_action_execution"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['ML platform', 'Business data', 'Decision engine', 'Action APIs'],
     isPremium: true
   },
   {
-    id: 'n8n-015',
-    name: 'Extractor de Leads B2B Avanzado',
-    description: 'Extrae y valida automáticamente leads B2B de múltiples fuentes, enriquece con datos adicionales y los integra en CRM.',
-    category: 'Ventas',
-    industry: ['B2B', 'SaaS', 'Servicios', 'Consultora'],
-    businessSize: 'pequeña',
-    complexity: 'intermedio',
-    estimatedROI: 320,
-    implementationTime: '4-5 semanas',
-    price: 1899,
-    features: [
-      'Extracción multi-fuente',
-      'Validación automática',
-      'Enriquecimiento de datos',
-      'Integración directa con CRM'
-    ],
-    tags: ['lead-generation', 'b2b', 'scraping', 'crm', 'validation'],
-    codePreview: `// Nodos: 27
-// Generador automático de leads B2B
-{
-  "multi_scraper": "extract_from_sources",
-  "lead_validator": "validate_contact_info",
-  "data_enricher": "enrich_with_company_data",
-  "crm_integration": "add_to_sales_pipeline"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Web scraping APIs', 'Data enrichment services', 'CRM APIs', 'Validation tools'],
-    isPremium: true
-  },
-
-  // Agentes Autónomos y Lógica Dinámica
-  {
-    id: 'n8n-016',
-    name: 'Agente Autónomo de Trading',
-    description: 'Agente de IA que opera automáticamente en mercados financieros con análisis técnico, gestión de riesgo y reportes en tiempo real.',
-    category: 'Finanzas',
-    industry: ['Fintech', 'Trading', 'Inversiones', 'Crypto'],
-    businessSize: 'enterprise',
-    complexity: 'avanzado',
-    estimatedROI: 400,
-    implementationTime: '8-12 semanas',
-    price: 4999,
-    features: [
-      'Trading automático con IA',
-      'Análisis técnico avanzado',
-      'Gestión de riesgo',
-      'Reportes en tiempo real'
-    ],
-    tags: ['trading', 'ia', 'finanzas', 'autonomous', 'risk-management'],
-    codePreview: `// Nodos: 45
-// Agente autónomo de trading
-{
-  "market_analyzer": "analyze_market_conditions",
-  "ai_decision_engine": "make_trading_decisions",
-  "risk_manager": "calculate_position_sizing",
-  "execution_engine": "execute_trades"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['Trading APIs', 'Market data feeds', 'AI/ML services', 'Risk management tools'],
-    isPremium: true
-  },
-  {
-    id: 'n8n-017',
-    name: 'Optimizador de Inventario con ML',
-    description: 'Sistema de ML que predice demanda, optimiza niveles de inventario automáticamente y gestiona reabastecimiento inteligente.',
-    category: 'Operaciones',
-    industry: ['E-commerce', 'Retail', 'Manufacturing', 'Logística'],
-    businessSize: 'mediana',
-    complexity: 'avanzado',
-    estimatedROI: 250,
-    implementationTime: '6-8 semanas',
-    price: 2799,
-    features: [
-      'Predicción de demanda con ML',
-      'Optimización automática de stock',
-      'Reabastecimiento inteligente',
-      'Analytics predictivos'
-    ],
-    tags: ['inventory', 'ml', 'prediction', 'optimization', 'automation'],
-    codePreview: `// Nodos: 36
-// Optimizador inteligente de inventario
-{
-  "demand_predictor": "ml_demand_forecast",
-  "inventory_optimizer": "optimize_stock_levels",
-  "auto_reorder": "intelligent_reordering",
-  "analytics": "predictive_inventory_analytics"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['ML/AI services', 'Inventory management system', 'Historical data', 'ERP integration'],
-    isPremium: true
-  },
-
-  // E-commerce y Automatización de Ventas
-  {
-    id: 'n8n-018',
-    name: 'Suite E-commerce Completa',
-    description: 'Automatización integral para e-commerce: gestión de pedidos, inventario, atención al cliente, marketing y analytics.',
-    category: 'E-commerce',
-    industry: ['E-commerce', 'Retail', 'Fashion', 'Electronics'],
+    id: 'wf-025',
+    name: 'Agente de Atención al Cliente 24/7',
+    description: 'Agente autónomo que maneja consultas de clientes 24/7 con escalación inteligente a humanos.',
+    category: 'Soporte',
+    industry: ['E-commerce', 'SaaS', 'Servicios', 'Tecnología'],
     businessSize: 'mediana',
     complexity: 'avanzado',
     estimatedROI: 380,
-    implementationTime: '8-10 semanas',
-    price: 3299,
-    features: [
-      'Gestión automática de pedidos',
-      'Control de inventario en tiempo real',
-      'Atención al cliente automatizada',
-      'Marketing automation integrado'
-    ],
-    tags: ['ecommerce', 'orders', 'inventory', 'customer-service', 'marketing'],
-    codePreview: `// Nodos: 42
-// Suite completa e-commerce
-{
-  "order_processor": "automate_order_fulfillment",
-  "inventory_sync": "real_time_stock_updates",
-  "customer_service": "automated_support_bot",
-  "marketing_engine": "personalized_campaigns"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['E-commerce platform', 'Payment gateways', 'Shipping APIs', 'Marketing tools'],
-    isPremium: true
-  },
-  {
-    id: 'n8n-019',
-    name: 'Recuperación de Carritos Abandonados con IA',
-    description: 'Sistema inteligente que detecta carritos abandonados y ejecuta campañas personalizadas de recuperación usando IA.',
-    category: 'E-commerce',
-    industry: ['E-commerce', 'Retail', 'SaaS', 'Subscription'],
-    businessSize: 'pequeña',
-    complexity: 'intermedio',
-    estimatedROI: 280,
-    implementationTime: '3-4 semanas',
-    price: 1599,
-    features: [
-      'Detección automática de abandonos',
-      'Campañas personalizadas con IA',
-      'Múltiples canales de contacto',
-      'A/B testing automático'
-    ],
-    tags: ['cart-abandonment', 'ia', 'personalization', 'recovery', 'ecommerce'],
-    codePreview: `// Nodos: 24
-// Recuperador inteligente de carritos
-{
-  "abandonment_detector": "detect_cart_abandonment",
-  "ai_personalizer": "create_personalized_message",
-  "channel_selector": "choose_best_channel",
-  "ab_tester": "optimize_recovery_rate"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['E-commerce platform', 'Email/SMS services', 'AI APIs', 'Analytics tools'],
+    implementationTime: '4-6 semanas',
+    price: 2200,
+    features: ['Atención 24/7', 'Escalación inteligente', 'Multi-canal', 'Base de conocimiento'],
+    tags: ['soporte', 'ai', '24/7', 'automatización'],
+    codePreview: '// Nodos: 34\n// Agente de soporte\n{\n  "receive": "multi_channel_input",\n  "process": "ai_response_generation",\n  "escalate": "human_handoff_logic"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['AI platform', 'Knowledge base', 'Multi-channel APIs', 'CRM integration'],
     isPremium: true
   },
 
-  // Automatización de Procesos de RRHH
+  // === OTROS / MISCELÁNEOS ===
   {
-    id: 'n8n-020',
-    name: 'Reclutamiento Automatizado con IA',
-    description: 'Automatiza el proceso de reclutamiento: screening de CVs, evaluaciones, programación de entrevistas y seguimiento de candidatos.',
-    category: 'RRHH',
-    industry: ['RRHH', 'Consultora', 'Tecnología', 'Servicios'],
+    id: 'wf-026',
+    name: 'Sistema de Gestión de Inventario IoT',
+    description: 'Gestiona automáticamente el inventario usando sensores IoT y reorder automático.',
+    category: 'Operaciones',
+    industry: ['Retail', 'Manufactura', 'E-commerce', 'Logística'],
     businessSize: 'mediana',
     complexity: 'avanzado',
     estimatedROI: 300,
     implementationTime: '6-8 semanas',
-    price: 2599,
-    features: [
-      'Screening automático de CVs',
-      'Evaluaciones con IA',
-      'Programación automática',
-      'Seguimiento de candidatos'
-    ],
-    tags: ['rrhh', 'recruitment', 'ia', 'screening', 'automation'],
-    codePreview: `// Nodos: 34
-// Sistema de reclutamiento inteligente
-{
-  "cv_screener": "ai_cv_analysis",
-  "skill_evaluator": "automated_skill_tests",
-  "scheduler": "auto_schedule_interviews",
-  "candidate_tracker": "track_recruitment_pipeline"
-}`,
-    fullImplementation: 'Workflow completo de n8n disponible después del pago',
-    requirements: ['ATS system', 'AI/NLP APIs', 'Calendar APIs', 'Email services'],
+    price: 2900,
+    features: ['Sensores IoT', 'Reorder automático', 'Predicción de demanda', 'Optimización de stock'],
+    tags: ['iot', 'inventario', 'automatización', 'predicción'],
+    codePreview: '// Nodos: 42\n// Gestión IoT inventario\n{\n  "sensors": "iot_sensor_data",\n  "analyze": "inventory_level_analysis",\n  "action": "automated_reorder"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['IoT sensors', 'Inventory system', 'Supplier APIs', 'Analytics platform'],
+    isPremium: true
+  },
+  {
+    id: 'wf-027',
+    name: 'Automatización de Procesos de RRHH',
+    description: 'Automatiza procesos de recursos humanos desde reclutamiento hasta onboarding.',
+    category: 'RRHH',
+    industry: ['Servicios', 'Tecnología', 'Consultoría', 'Corporativo'],
+    businessSize: 'mediana',
+    complexity: 'avanzado',
+    estimatedROI: 280,
+    implementationTime: '5-7 semanas',
+    price: 2400,
+    features: ['Reclutamiento automático', 'Screening de CVs', 'Onboarding digital', 'Evaluaciones automáticas'],
+    tags: ['rrhh', 'reclutamiento', 'onboarding', 'automatización'],
+    codePreview: '// Nodos: 36\n// Automatización RRHH\n{\n  "recruit": "automated_job_posting",\n  "screen": "cv_screening_ai",\n  "onboard": "digital_onboarding_flow"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['HR systems', 'ATS platform', 'Document management', 'Communication tools'],
+    isPremium: true
+  },
+  {
+    id: 'wf-028',
+    name: 'Sistema de Compliance Automatizado',
+    description: 'Monitorea y asegura el cumplimiento de regulaciones automáticamente con reportes.',
+    category: 'Operaciones',
+    industry: ['Finanzas', 'Salud', 'Tecnología', 'Servicios'],
+    businessSize: 'enterprise',
+    complexity: 'avanzado',
+    estimatedROI: 250,
+    implementationTime: '8-10 semanas',
+    price: 3800,
+    features: ['Monitoreo continuo', 'Reportes automáticos', 'Alertas de incumplimiento', 'Audit trail'],
+    tags: ['compliance', 'regulaciones', 'monitoreo', 'reportes'],
+    codePreview: '// Nodos: 48\n// Sistema compliance\n{\n  "monitor": "continuous_compliance_check",\n  "analyze": "regulation_compliance_analysis",\n  "report": "automated_compliance_reporting"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Compliance databases', 'Monitoring tools', 'Reporting platform', 'Legal APIs'],
+    isPremium: true
+  },
+  {
+    id: 'wf-029',
+    name: 'Plataforma de Analytics Unificada',
+    description: 'Centraliza datos de múltiples fuentes en un dashboard unificado con insights automáticos.',
+    category: 'Operaciones',
+    industry: ['SaaS', 'E-commerce', 'Marketing', 'Tecnología'],
+    businessSize: 'mediana',
+    complexity: 'avanzado',
+    estimatedROI: 320,
+    implementationTime: '6-8 semanas',
+    price: 2650,
+    features: ['Múltiples fuentes', 'Dashboard unificado', 'Insights automáticos', 'Reportes personalizados'],
+    tags: ['analytics', 'dashboard', 'insights', 'unificación'],
+    codePreview: '// Nodos: 40\n// Analytics unificada\n{\n  "collect": "multi_source_data_collection",\n  "process": "unified_data_processing",\n  "visualize": "dynamic_dashboard_generation"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Multiple APIs', 'Data warehouse', 'Visualization tools', 'Analytics platform'],
+    isPremium: true
+  },
+  {
+    id: 'wf-030',
+    name: 'Sistema de Gestión de Calidad Automatizado',
+    description: 'Automatiza procesos de control de calidad con inspecciones y reportes automáticos.',
+    category: 'Operaciones',
+    industry: ['Manufactura', 'Servicios', 'E-commerce', 'Logística'],
+    businessSize: 'mediana',
+    complexity: 'intermedio',
+    estimatedROI: 220,
+    implementationTime: '4-6 semanas',
+    price: 1800,
+    features: ['Inspecciones automáticas', 'Control de calidad', 'Reportes de calidad', 'Alertas de problemas'],
+    tags: ['calidad', 'inspecciones', 'control', 'automatización'],
+    codePreview: '// Nodos: 24\n// Gestión de calidad\n{\n  "inspect": "automated_quality_inspection",\n  "analyze": "quality_metrics_analysis",\n  "report": "quality_report_generation"\n}',
+    fullImplementation: 'Workflow completo disponible después del pago',
+    requirements: ['Quality systems', 'Inspection tools', 'Reporting platform', 'Alert system'],
     isPremium: true
   }
 ];
